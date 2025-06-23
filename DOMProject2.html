@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Changer</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for button hover effect and font */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        .change-color-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .change-color-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <!-- Main container for the application -->
+    <div class="container flex flex-col items-center justify-center p-8 bg-white rounded-xl shadow-lg space-y-8 max-w-sm w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
+        <!-- Heading -->
+        <h1 class="text-4xl font-extrabold text-gray-800 mb-6 text-center">Color Changer</h1>
+
+        <!-- Color display box -->
+        <div id="color-box" class="w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-blue-500 rounded-xl shadow-md transition-colors duration-300 ease-in-out border-4 border-gray-200"></div>
+
+        <!-- Button to change color -->
+        <button id="change-color-btn" class="change-color-btn px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-lg font-semibold rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-purple-300">
+            Change Color
+        </button>
+    </div>
+
+    <script>
+        // Ensure the DOM is fully loaded before executing the script
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to the color-box and change-color-btn elements
+            const colorBox = document.getElementById('color-box');
+            const changeColorBtn = document.getElementById('change-color-btn');
+
+            /**
+             * Generates a random hexadecimal color code.
+             * @returns {string} A string representing a random hex color (e.g., "#RRGGBB").
+             */
+            function getRandomColor() {
+                const letters = '0123456789ABCDEF';
+                let color = '#';
+                // Loop 6 times to generate 6 hexadecimal characters
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            // Add a click event listener to the button
+            changeColorBtn.addEventListener('click', () => {
+                // Generate a random color
+                const newColor = getRandomColor();
+                // Apply the new random color to the background of the color-box
+                colorBox.style.backgroundColor = newColor;
+            });
+        });
+    </script>
+</body>
+</html>
